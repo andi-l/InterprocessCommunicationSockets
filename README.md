@@ -1,21 +1,23 @@
-Dokumentation:
-Verwendung von Sockets für die Interprozesskommunikation in C
+# Dokumentation
+
+**Verwendung von Sockets für die Interprozesskommunikation in C**
 
 In dieser Dokumentation stelle ich ein Programm vor, das in C geschrieben wurde und die Interprozesskommunikation mittels Sockets zeigt. Es ist ein ein informatives Beispiel für den Einsatz von Sockets, Prozessverwaltungsfunktionen und Datei-I/O in C.
 
 
-Überblick über das Programm
+**Überblick über das Programm**
 
 Dieses Programm implementiert diverse Aspekte der Systemprogrammierung. Es baut eine Kette von Subprozessen auf, wobei jeder Subprozess seine eigene spezifische Funktion hat. Die Kommunikation zwischen diesen Subprozessen wird durch Sockets ermöglicht, die mit der Funktion ''socketpair()'' erstellt werden. Darüber hinaus sorgt eine Signalhandler-Routine für einen geordneten Abschluss des Programms, wenn die Tastenkombination '''Ctrl-C'' erkannt wird. 
 
-Abhängigkeiten und globale Variablen
+
+**Abhängigkeiten und globale Variablen**
 
 Im Programm werden mehrere mehrere Standardbibliotheken verwendet, um Funktionen und Datentypen bereitzustellen, die für Systemprogrammierung, Datei-I/O, Signalverarbeitung und weitere Anforderungen benötigt sind.
 
 Der Datentyp ''volatile sig_atomic_t'' ist speziell für diese Zwecke gedacht, um Wettlaufbedingungen und unerwartete Verhaltensweisen zu verhindern.
 
 
-Hauptfunktion und Prozess-Generierung
+**Hauptfunktion und Prozess-Generierung**
 
 Die Hauptfunktion ''main()'' ist der Startpunkt des Programms. Sie legt zunächst den Signalhandler für das SIGINT-Signal fest. Anschließend startet sie die Hauptschleife des Programms, die erst dann endet, wenn ein SIGINT-Signal empfangen wird.
 
@@ -24,11 +26,7 @@ In dieser Schleife werden zunächst zwei Sockets über die Funktion ''socketpair
 Anschließend erstellt das Programm eine Kette von vier Subprozessen durch fortlaufende Aufrufe der Funktion ''fork()''. Jeder dieser Subprozesse hat spezifische Aufgaben, die nachfolgend erläutert werden.
 
 
-
-
-
-
-Datenverarbeitung und -auswertung
+**Datenverarbeitung und -auswertung**
 
 Der vierte Subprozess (das innerste Glied in der Kette) erzeugt eine Reihe von Zufallszahlen, gibt diese auf der Konsole aus und schreibt sie in einen der Sockets. Ich habe ''srand(time(NULL))'' verwendet, um den Zufallszahlengenerator mit der aktuellen Uhrzeit als Seed zu initialisieren. Dies stellt sicher, dass bei jedem Durchlauf des Programms eine andere Zahlenreihe generiert wird.
 
